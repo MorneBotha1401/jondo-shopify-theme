@@ -1,0 +1,147 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" style="background-image:url('{% if section.settings.bg_image != blank %}{{ section.settings.bg_image | image_url: width: 1920 }}{% else %}https://jondosport.com/cdn/shop/files/shayphotographygolf-336.jpg?v=1758656345&width=1920{% endif %}')"></div>
+  <div class="hero-content">
+    {% assign italic_word = section.settings.headline_italic_word %}
+    {% assign italic_wrapped = '<em>' | append: italic_word | append: '</em>' %}
+    <h1 class="hero-h1">{{ section.settings.headline | replace: italic_word, italic_wrapped }}</h1>
+    <p class="hero-sub">{{ section.settings.subheading }}</p>
+    <div class="hero-trust">
+      <span class="hero-stars">★★★★★</span>
+      <span class="hero-trust-text">{{ section.settings.rating }} &nbsp;·&nbsp; {{ section.settings.review_count }} verified reviews</span>
+      <span class="hero-trust-sep">·</span>
+      <span class="hero-trust-text">{{ section.settings.price_from }}</span>
+      <span class="hero-trust-sep">·</span>
+      <span class="hero-trust-text">Free shipping</span>
+      <span class="hero-trust-sep">·</span>
+      <span class="hero-trust-text">2-year warranty</span>
+    </div>
+    <div class="hero-actions">
+      <a href="{{ section.settings.btn_1_link }}" class="hero-btn">{{ section.settings.btn_1_text }}</a>
+      <a href="{{ section.settings.btn_2_link }}" class="hero-btn-ghost">{{ section.settings.btn_2_text }}</a>
+    </div>
+  </div>
+
+  {% if section.settings.show_ernie_badge %}
+    <div class="hero-ernie-badge" aria-label="Co-Owned by Ernie Els, 4× Major Champion">
+      <svg width="168" height="168" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="arc-top-hero" d="M 14,80 A 66,66 0 0,1 146,80"/>
+          <path id="arc-bot-hero" d="M 14,80 A 66,66 0 0,0 146,80"/>
+          <radialGradient id="bdg2-hero" cx="50%" cy="34%" r="72%">
+            <stop offset="0%" stop-color="#112240"/>
+            <stop offset="100%" stop-color="#060e1c"/>
+          </radialGradient>
+        </defs>
+        <circle cx="80" cy="80" r="78" fill="url(#bdg2-hero)"/>
+        <circle cx="80" cy="80" r="78" fill="none" stroke="#B8A36B" stroke-width="1.2"/>
+        <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(184,163,107,0.14)" stroke-width="0.75"/>
+        <text fill="#B8A36B" font-family="Georgia,serif" font-size="8" letter-spacing="1.6">
+          <textPath href="#arc-top-hero" startOffset="50%" text-anchor="middle">CO-OWNER · 4× MAJOR CHAMPION</textPath>
+        </text>
+        <text fill="rgba(184,163,107,0.32)" font-family="Georgia,serif" font-size="7.5" letter-spacing="2.2">
+          <textPath href="#arc-bot-hero" startOffset="50%" text-anchor="middle">· JONDO SPORT ·</textPath>
+        </text>
+        <text x="80" y="108" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Georgia,serif" font-size="7" letter-spacing="2">ERNIE ELS</text>
+        <line x1="44" y1="116" x2="116" y2="116" stroke="rgba(184,163,107,0.22)" stroke-width="0.75"/>
+        <circle cx="80" cy="121" r="1.4" fill="rgba(184,163,107,0.38)"/>
+        <circle cx="74" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+        <circle cx="86" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+      </svg>
+      {% if section.settings.ernie_signature != blank %}
+        {{ section.settings.ernie_signature | image_url: width: 400 | image_tag: alt: 'Ernie Els signature', class: 'badge-sig', width: 400, height: 120 }}
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Photo Hero",
+  "tag": "div",
+  "class": "jondo-photo-hero-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+      "info": "Upload a full-screen hero photo to Shopify Files then select it here."
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "The lens is the difference."
+    },
+    {
+      "type": "text",
+      "id": "headline_italic_word",
+      "label": "Word to italicise in headline",
+      "default": "is",
+      "info": "Type the exact word from the headline that you want displayed in italic."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "RX-Lab Cast Optics"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Star rating",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "2,400+"
+    },
+    {
+      "type": "text",
+      "id": "price_from",
+      "label": "Price from text",
+      "default": "From $242"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Button 1 text",
+      "default": "Discover the collection"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Button 2 text",
+      "default": "How it's made →"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ernie_badge",
+      "label": "Show Ernie badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "ernie_signature",
+      "label": "Ernie signature image",
+      "info": "Upload ernie-signature.png to Shopify Files then select it here."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Photo Hero"
+    }
+  ]
+}
+{% endschema %}

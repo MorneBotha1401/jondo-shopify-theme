@@ -1,0 +1,90 @@
+<section class="vid-hero">
+  {% if section.settings.video_url != blank %}
+    <video class="vid-hero-video" id="vid-hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="{{ section.settings.video_url }}" type="video/mp4">
+    </video>
+  {% endif %}
+  <div class="vid-hero-overlay"></div>
+
+  <!-- Hamburger menu — top left -->
+  <a href="#nav" class="vid-hero-menu" aria-label="Open menu" id="vid-menu-btn">
+    <div class="vid-hero-menu-icon">
+      <span></span><span></span><span></span>
+    </div>
+    <span class="vid-hero-menu-label">Menu</span>
+  </a>
+
+  <div class="vid-hero-logo">
+    {% if section.settings.logo_image != blank %}
+      {{ section.settings.logo_image | image_url: width: 290 | image_tag: alt: shop.name, width: 290, height: 56, style: 'height:56px;width:auto;filter:brightness(0) invert(1);opacity:.88;display:block;' }}
+    {% else %}
+      <img src="https://jondosport.com/cdn/shop/files/JondoSport_Logo_new.webp?v=1758660593&width=290" alt="{{ shop.name }}" width="290" height="56" style="height:56px;width:auto;filter:brightness(0) invert(1);opacity:.88;display:block;">
+    {% endif %}
+  </div>
+
+  <div class="vid-hero-content" id="main-content">
+    <h1 class="vid-hero-h1">{{ section.settings.headline }}</h1>
+    <a href="{{ section.settings.btn_link | default: '#main-content' }}" class="vid-hero-btn">{{ section.settings.btn_text }}</a>
+  </div>
+
+  <div class="vid-hero-price">
+    <span class="vid-hero-price-from">{{ section.settings.price_label }}</span>
+    <span class="vid-hero-price-amount">{{ section.settings.price_amount }}</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video Hero",
+  "tag": "div",
+  "class": "jondo-video-hero-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Upload your video to Shopify Files (Settings → Files), then paste the URL here.",
+      "default": ""
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Built specifically for golf. Period."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "Discover More"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Price label",
+      "default": "Starting at"
+    },
+    {
+      "type": "text",
+      "id": "price_amount",
+      "label": "Price amount",
+      "default": "$242"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Hero"
+    }
+  ]
+}
+{% endschema %}

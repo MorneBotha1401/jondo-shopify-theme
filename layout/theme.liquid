@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }} — {{ shop.name }}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+
+  {{ content_for_header }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,1,300;9..144,1,400;9..144,1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  {{ 'jondo.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+  {{ content_for_layout }}
+  <script src="{{ 'jondo.js' | asset_url }}" defer></script>
+</body>
+</html>

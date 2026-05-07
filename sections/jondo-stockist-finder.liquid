@@ -1,0 +1,89 @@
+<section class="stockist">
+  <div class="stockist-inner reveal">
+    <span class="stockist-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2 class="stockist-h">{{ section.settings.headline }}</h2>
+    <p class="stockist-sub">{{ section.settings.subtext }}</p>
+    <div class="stockist-form">
+      <input class="stockist-input" id="stockist-input" type="text" placeholder="{{ section.settings.placeholder }}" autocomplete="off">
+      <button class="stockist-search-btn" id="stockist-btn">{{ section.settings.search_btn_text }}</button>
+    </div>
+    <div class="stockist-results" id="stockist-results"></div>
+    <div class="stockist-no-result" id="stockist-no-result">
+      No stockists found for that location.
+      {% if section.settings.online_btn_link != blank %}
+        <a href="{{ section.settings.online_btn_link }}" style="color:var(--gold)">{{ section.settings.online_btn_text }} →</a>
+      {% endif %}
+    </div>
+    <div class="stockist-divider">or</div>
+    <a href="{{ section.settings.online_btn_link }}" class="stockist-online">
+      <strong>{{ section.settings.online_btn_text }}</strong> &nbsp;— Free Worldwide Shipping · 30-Day Returns
+    </a>
+  </div>
+</section>
+
+{% if section.settings.stockist_data != blank %}
+  <script id="jondo-stockist-data" type="application/json">{{ section.settings.stockist_data }}</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Stockist Finder",
+  "tag": "div",
+  "class": "jondo-stockist-finder-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Available Worldwide"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Find a JONDO Stockist"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Sub text",
+      "default": "Search by city, country, or club name to find your nearest retailer. Or shop online for free worldwide shipping."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search input placeholder",
+      "default": "Enter city, country or club name…"
+    },
+    {
+      "type": "text",
+      "id": "search_btn_text",
+      "label": "Search button text",
+      "default": "Search"
+    },
+    {
+      "type": "text",
+      "id": "online_btn_text",
+      "label": "Online shop link text",
+      "default": "Shop Online"
+    },
+    {
+      "type": "url",
+      "id": "online_btn_link",
+      "label": "Online shop link URL"
+    },
+    {
+      "type": "textarea",
+      "id": "stockist_data",
+      "label": "Stockist data (JSON)",
+      "info": "Enter stockist data in JSON format: [{\"name\":\"Club Name\",\"addr\":\"City, Country\",\"url\":\"https://...\"}]. One object per stockist.",
+      "default": "[{\"name\":\"Ernie Els Golf\",\"addr\":\"Sun City, South Africa\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Pecanwood Golf & Country Club\",\"addr\":\"Hartbeespoort, South Africa\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Fancourt Golf Estate\",\"addr\":\"George, South Africa\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Augusta National Pro Shop\",\"addr\":\"Augusta, Georgia, USA\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Wentworth Golf Club\",\"addr\":\"Virginia Water, Surrey, UK\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Emirates Golf Club\",\"addr\":\"Dubai, UAE\",\"url\":\"https://www.jondosport.com\"},{\"name\":\"Royal Melbourne Golf Club\",\"addr\":\"Black Rock, Victoria, Australia\",\"url\":\"https://www.jondosport.com\"}]"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stockist Finder"
+    }
+  ]
+}
+{% endschema %}

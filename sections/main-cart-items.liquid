@@ -1,0 +1,42 @@
+<div class="main-cart">
+  {% if cart.item_count > 0 %}
+    <h1 class="main-cart-title">Your Cart ({{ cart.item_count }})</h1>
+    {% form 'cart', cart %}
+      <div class="main-cart-items">
+        {% for item in cart.items %}
+          <div class="main-cart-item">
+            {% if item.image %}
+              {{ item.image | image_url: width: 200 | image_tag: alt: item.title, width: 200, height: 200, loading: 'lazy' }}
+            {% endif %}
+            <div class="main-cart-item-info">
+              <a href="{{ item.url }}" class="main-cart-item-title">{{ item.product.title }}</a>
+              {% unless item.variant.title == 'Default Title' %}
+                <p class="main-cart-item-variant">{{ item.variant.title }}</p>
+              {% endunless %}
+              <p class="main-cart-item-price">{{ item.final_line_price | money }}</p>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="main-cart-qty">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="main-cart-footer">
+        <p class="main-cart-total">Total: {{ cart.total_price | money }}</p>
+        <button type="submit" name="update" class="main-cart-update-btn">Update Cart</button>
+        <a href="{{ routes.checkout_url }}" class="main-cart-checkout-btn">Checkout</a>
+      </div>
+    {% endform %}
+  {% else %}
+    <h1 class="main-cart-title">Your cart is empty</h1>
+    <a href="{{ routes.all_products_collection_url }}" class="main-cart-shop-btn">Continue Shopping</a>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "div",
+  "class": "main-cart-wrap",
+  "settings": [],
+  "presets": [{ "name": "Cart" }]
+}
+{% endschema %}
