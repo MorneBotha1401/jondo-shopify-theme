@@ -1,0 +1,31 @@
+<div class="main-login">
+  <div class="main-login-box">
+    <h1 class="main-login-title">Log In</h1>
+    {% form 'customer_login' %}
+      {{ form.errors | default_errors }}
+      <div class="main-login-field">
+        <label for="CustomerEmail">Email</label>
+        <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
+      </div>
+      <div class="main-login-field">
+        <label for="CustomerPassword">Password</label>
+        <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="main-login-btn">Log In</button>
+    {% endform %}
+    <p class="main-login-create">
+      <a href="{{ routes.account_register_url }}">Create an account</a> &nbsp;·&nbsp;
+      <a href="{{ routes.account_recover_url }}">Forgot password?</a>
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Login",
+  "tag": "div",
+  "class": "main-login-wrap",
+  "settings": [],
+  "presets": [{ "name": "Login" }]
+}
+{% endschema %}

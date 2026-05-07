@@ -1,0 +1,148 @@
+<section class="guarantee">
+  <div class="guar-bg" style="background-image:url('{% if section.settings.bg_image != blank %}{{ section.settings.bg_image | image_url: width: 2000 }}{% else %}https://jondosport.com/cdn/shop/files/shayphotographygolf-436.jpg?v=1760204838&width=2000{% endif %}')"></div>
+  <div class="guar-inner">
+
+    <div class="guar-left">
+      {% if section.settings.jondo_logo != blank %}
+        {{ section.settings.jondo_logo | image_url: width: 290 | image_tag: alt: shop.name, class: 'guar-jondo-logo', width: 290, height: 56 }}
+      {% else %}
+        <img src="https://jondosport.com/cdn/shop/files/JondoSport_Logo_new.webp?v=1758660593&width=290" alt="{{ shop.name }}" class="guar-jondo-logo" width="290" height="56">
+      {% endif %}
+      <div class="guar-ernie-wrap">
+        <svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="garc-top-guar" d="M 14,80 A 66,66 0 0,1 146,80"/>
+            <path id="garc-bot-guar" d="M 14,80 A 66,66 0 0,0 146,80"/>
+            <radialGradient id="gbdg-guar" cx="50%" cy="34%" r="72%">
+              <stop offset="0%" stop-color="#112240"/>
+              <stop offset="100%" stop-color="#060e1c"/>
+            </radialGradient>
+          </defs>
+          <circle cx="80" cy="80" r="78" fill="url(#gbdg-guar)"/>
+          <circle cx="80" cy="80" r="78" fill="none" stroke="#B8A36B" stroke-width="1.2"/>
+          <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(184,163,107,0.14)" stroke-width="0.75"/>
+          <text fill="#B8A36B" font-family="Georgia,serif" font-size="8" letter-spacing="1.6">
+            <textPath href="#garc-top-guar" startOffset="50%" text-anchor="middle">CO-OWNER · 4× MAJOR CHAMPION</textPath>
+          </text>
+          <text fill="rgba(184,163,107,0.32)" font-family="Georgia,serif" font-size="7.5" letter-spacing="2.2">
+            <textPath href="#garc-bot-guar" startOffset="50%" text-anchor="middle">· JONDO SPORT ·</textPath>
+          </text>
+          <text x="80" y="108" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Georgia,serif" font-size="7" letter-spacing="2">ERNIE ELS</text>
+          <line x1="44" y1="116" x2="116" y2="116" stroke="rgba(184,163,107,0.22)" stroke-width="0.75"/>
+          <circle cx="80" cy="121" r="1.4" fill="rgba(184,163,107,0.38)"/>
+          <circle cx="74" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+          <circle cx="86" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+        </svg>
+        {% if section.settings.ernie_signature != blank %}
+          {{ section.settings.ernie_signature | image_url: width: 400 | image_tag: alt: 'Ernie Els signature', class: 'guar-ernie-sig', width: 400, height: 120 }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="guar-headline reveal">
+      <h2>{{ section.settings.headline }}</h2>
+    </div>
+
+    <div class="guar-list reveal">
+      {% for block in section.blocks %}
+        {% if block.type == 'check_item' %}
+          <div class="guar-item" {{ block.shopify_attributes }}>
+            <span class="guar-check">✓</span>
+            <span class="guar-item-text">{{ block.settings.text }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+  {% if section.settings.footer_link_url != blank %}
+    <div class="guar-foot">
+      <a href="{{ section.settings.footer_link_url }}">{{ section.settings.footer_link_text }} &rsaquo;</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Guarantee",
+  "tag": "div",
+  "class": "jondo-guarantee-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+      "info": "Upload a full-width background photo to Shopify Files then select it here."
+    },
+    {
+      "type": "image_picker",
+      "id": "jondo_logo",
+      "label": "JONDO logo (white version)",
+      "info": "Upload JondoSport_Logo_new.webp to Shopify Files then select it here."
+    },
+    {
+      "type": "image_picker",
+      "id": "ernie_signature",
+      "label": "Ernie signature image",
+      "info": "Upload ernie-signature.png to Shopify Files then select it here."
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "We Stand Behind Every Lens."
+    },
+    {
+      "type": "text",
+      "id": "footer_link_text",
+      "label": "Footer link text",
+      "default": "Learn About Our Guarantee"
+    },
+    {
+      "type": "url",
+      "id": "footer_link_url",
+      "label": "Footer link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "check_item",
+      "name": "Guarantee Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Guarantee point"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Guarantee",
+      "blocks": [
+        {
+          "type": "check_item",
+          "settings": {
+            "text": "30-Day Free Returns. No Questions Asked."
+          }
+        },
+        {
+          "type": "check_item",
+          "settings": {
+            "text": "2-Year Full Warranty Coverage"
+          }
+        },
+        {
+          "type": "check_item",
+          "settings": {
+            "text": "Co-Founded by Ernie Els. Built for Serious Golfers."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

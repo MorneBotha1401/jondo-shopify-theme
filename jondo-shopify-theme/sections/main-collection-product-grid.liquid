@@ -1,0 +1,34 @@
+<div class="main-collection">
+  <div class="main-collection-header">
+    <h1 class="main-collection-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="main-collection-desc">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+  <div class="main-collection-grid">
+    {% paginate collection.products by 24 %}
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="main-collection-card">
+          {% if product.featured_image %}
+            {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, width: 600, height: 600, loading: 'lazy' }}
+          {% endif %}
+          <div class="main-collection-card-body">
+            <div class="main-collection-card-title">{{ product.title }}</div>
+            <div class="main-collection-card-price">{{ product.price_min | money }}</div>
+          </div>
+        </a>
+      {% endfor %}
+      {{ paginate | default_pagination }}
+    {% endpaginate %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "div",
+  "class": "main-collection-wrap",
+  "settings": [],
+  "presets": [{ "name": "Collection Grid" }]
+}
+{% endschema %}

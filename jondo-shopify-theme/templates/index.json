@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "video_hero": { "type": "jondo-video-hero", "settings": {} },
+    "announcement_bar": { "type": "jondo-announcement-bar", "settings": {} },
+    "photo_hero": { "type": "jondo-photo-hero", "settings": {} },
+    "ernie_bar": { "type": "jondo-ernie-bar", "settings": {} },
+    "manifesto": { "type": "jondo-manifesto", "settings": {} },
+    "visual_difference": { "type": "jondo-visual-difference", "settings": {} },
+    "frame_grid": { "type": "jondo-frame-grid", "settings": {} },
+    "proof_banner": { "type": "jondo-proof-banner", "settings": {} },
+    "collection_grid": { "type": "jondo-collection-grid", "settings": {} },
+    "guarantee": { "type": "jondo-guarantee", "settings": {} },
+    "ernie_story": { "type": "jondo-ernie-story", "settings": {} },
+    "shop_cta": { "type": "jondo-shop-cta", "settings": {} },
+    "reviews": { "type": "jondo-reviews", "settings": {} },
+    "faq": { "type": "jondo-faq", "settings": {} },
+    "email_capture": { "type": "jondo-email-capture", "settings": {} },
+    "stockist_finder": { "type": "jondo-stockist-finder", "settings": {} }
+  },
+  "order": [
+    "video_hero",
+    "announcement_bar",
+    "photo_hero",
+    "ernie_bar",
+    "manifesto",
+    "visual_difference",
+    "frame_grid",
+    "proof_banner",
+    "collection_grid",
+    "guarantee",
+    "ernie_story",
+    "shop_cta",
+    "reviews",
+    "faq",
+    "email_capture",
+    "stockist_finder"
+  ]
+}

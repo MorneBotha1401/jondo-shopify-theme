@@ -1,0 +1,54 @@
+<section class="manifesto reveal">
+  <div class="container">
+    <span class="manifesto-eyebrow">{{ section.settings.eyebrow }}</span>
+    {% assign italic_word = section.settings.headline_italic %}
+    {% assign italic_wrapped = '<em>' | append: italic_word | append: '</em>' %}
+    <h2 class="manifesto-h">{{ section.settings.headline | replace: italic_word, italic_wrapped }}</h2>
+    <a href="{{ section.settings.link_url }}" class="manifesto-link">{{ section.settings.link_text }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "tag": "div",
+  "class": "jondo-manifesto-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "The Lens Difference"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Not coated. Cast."
+    },
+    {
+      "type": "text",
+      "id": "headline_italic",
+      "label": "Word/phrase to italicise",
+      "default": "Cast.",
+      "info": "Type the exact word(s) from the headline above to display in italic."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Read how the lens is made →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manifesto"
+    }
+  ]
+}
+{% endschema %}

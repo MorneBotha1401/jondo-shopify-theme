@@ -1,0 +1,126 @@
+<section class="ernie-story">
+  <div class="ernie-inner">
+    <div class="ernie-img reveal">
+      {% if section.settings.photo != blank %}
+        {{ section.settings.photo | image_url: width: 800 | image_tag: alt: 'Ernie Els — Co-Owner, JONDO Sport', loading: 'lazy', width: 800, height: 900 }}
+      {% endif %}
+      <div class="ernie-img-caption">
+        <div class="ernie-img-name">Ernie Els</div>
+        <span class="ernie-img-title">4× Major Champion &nbsp;·&nbsp; Co-Owner, JONDO Sport</span>
+      </div>
+    </div>
+    <div class="reveal rd2">
+      <span class="ernie-text-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="ernie-text-h">{{ section.settings.headline }}</h2>
+      <p class="ernie-text-body">{{ section.settings.body }}</p>
+      <blockquote class="ernie-text-quote">{{ section.settings.quote }}</blockquote>
+      <div class="ernie-stats">
+        <div>
+          <div class="ernie-stat-n">{{ section.settings.stat_1_num }}</div>
+          <div class="ernie-stat-l">{{ section.settings.stat_1_label }}</div>
+        </div>
+        <div>
+          <div class="ernie-stat-n">{{ section.settings.stat_2_num }}</div>
+          <div class="ernie-stat-l">{{ section.settings.stat_2_label }}</div>
+        </div>
+        <div>
+          <div class="ernie-stat-n">{{ section.settings.stat_3_num }}</div>
+          <div class="ernie-stat-l">{{ section.settings.stat_3_label }}</div>
+        </div>
+      </div>
+      <a href="{{ section.settings.link_url }}" class="ernie-text-link">{{ section.settings.link_text }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ernie Story",
+  "tag": "div",
+  "class": "jondo-ernie-story-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Ernie photo",
+      "info": "Upload ernie-els.jpg to Shopify Files then select it here."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Not a sponsorship. A conviction."
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Not a paid endorsement. A partnership built on belief in the lens."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "A 4× Major Champion co-owns JONDO because he plays in them. Not because of a cheque — because after decades at the highest level, he found eyewear that matched his standards on the course."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I've never found a sunglass I could play with that are so clear and comfortable as these JONDO glasses."
+    },
+    {
+      "type": "text",
+      "id": "stat_1_num",
+      "label": "Stat 1 number",
+      "default": "100+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Tour Professionals"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_num",
+      "label": "Stat 2 number",
+      "default": "4×"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Major Champion"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_num",
+      "label": "Stat 3 number",
+      "default": "2-yr"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Warranty"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Read the full story →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ernie Story"
+    }
+  ]
+}
+{% endschema %}

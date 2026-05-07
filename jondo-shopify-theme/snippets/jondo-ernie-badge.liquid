@@ -1,0 +1,33 @@
+{% assign badge_size = badge_size | default: 160 %}
+{% assign badge_id_suffix = badge_id_suffix | default: 'default' %}
+<div class="ernie-badge-wrap" style="position:relative;width:{{ badge_size }}px;height:{{ badge_size }}px;">
+  <svg width="{{ badge_size }}" height="{{ badge_size }}" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <path id="arc-top-{{ badge_id_suffix }}" d="M 14,80 A 66,66 0 0,1 146,80"/>
+      <path id="arc-bot-{{ badge_id_suffix }}" d="M 14,80 A 66,66 0 0,0 146,80"/>
+      <radialGradient id="bdg-{{ badge_id_suffix }}" cx="50%" cy="34%" r="72%">
+        <stop offset="0%" stop-color="#112240"/>
+        <stop offset="100%" stop-color="#060e1c"/>
+      </radialGradient>
+    </defs>
+    <circle cx="80" cy="80" r="78" fill="url(#bdg-{{ badge_id_suffix }})"/>
+    <circle cx="80" cy="80" r="78" fill="none" stroke="#B8A36B" stroke-width="1.2"/>
+    <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(184,163,107,0.14)" stroke-width="0.75"/>
+    <text fill="#B8A36B" font-family="Georgia,serif" font-size="8" letter-spacing="1.6">
+      <textPath href="#arc-top-{{ badge_id_suffix }}" startOffset="50%" text-anchor="middle">CO-OWNER · 4× MAJOR CHAMPION</textPath>
+    </text>
+    <text fill="rgba(184,163,107,0.32)" font-family="Georgia,serif" font-size="7.5" letter-spacing="2.2">
+      <textPath href="#arc-bot-{{ badge_id_suffix }}" startOffset="50%" text-anchor="middle">· JONDO SPORT ·</textPath>
+    </text>
+    <text x="80" y="108" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Georgia,serif" font-size="7" letter-spacing="2">ERNIE ELS</text>
+    <line x1="44" y1="116" x2="116" y2="116" stroke="rgba(184,163,107,0.22)" stroke-width="0.75"/>
+    <circle cx="80" cy="121" r="1.4" fill="rgba(184,163,107,0.38)"/>
+    <circle cx="74" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+    <circle cx="86" cy="121" r="0.9" fill="rgba(184,163,107,0.18)"/>
+  </svg>
+  {% if ernie_signature != blank %}
+    <img class="badge-sig" src="{{ ernie_signature | image_url: width: 400 }}" alt="Ernie Els signature" style="position:absolute;width:58%;height:auto;left:50%;top:38%;transform:translate(-50%,-50%);filter:invert(1);mix-blend-mode:screen;opacity:.82;">
+  {% else %}
+    <img class="badge-sig" src="{{ 'ernie-signature.png' | asset_url }}" alt="Ernie Els signature" style="position:absolute;width:58%;height:auto;left:50%;top:38%;transform:translate(-50%,-50%);filter:invert(1);mix-blend-mode:screen;opacity:.82;">
+  {% endif %}
+</div>

@@ -1,0 +1,261 @@
+<nav id="nav">
+  <a href="{{ section.settings.logo_url | default: '/' }}" class="nav-logo">
+    {% if section.settings.logo_image != blank %}
+      {{ section.settings.logo_image | image_url: width: 290 | image_tag: alt: shop.name, width: 290, height: 56 }}
+    {% else %}
+      <img src="https://jondosport.com/cdn/shop/files/JondoSport_new_logo_Navy.png?v=1761073533&width=290" alt="{{ shop.name }}" width="290" height="56">
+    {% endif %}
+  </a>
+
+  <ul class="nav-links">
+    {% for block in section.blocks %}
+      {% if block.type == 'nav_link' %}
+        <li {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link_url }}">{{ block.settings.link_text }}</a>
+          {% if block.settings.show_dropdown %}
+            <div class="nav-dropdown">
+              {% assign dropdown_links = block.settings.dropdown_links | split: '|' %}
+              {% for entry in dropdown_links %}
+                {% assign parts = entry | split: '>' %}
+                {% if parts.size == 2 %}
+                  <a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a>
+                {% elsif parts.size == 1 and entry != blank %}
+                  <a href="#">{{ entry | strip }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <button class="nav-hamburger" id="nav-hamburger-btn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav-actions">
+    <button class="nav-icon" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+    </button>
+    <button class="nav-icon" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </button>
+    <div class="nav-cart-wrap">
+      <button class="nav-icon" aria-label="Cart">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 1h3l2.3 9.8a2 2 0 0 0 2 1.7h7.4a2 2 0 0 0 2-1.6L19 5H5"/>
+          <circle cx="8" cy="17" r="1.2" fill="currentColor" stroke="none"/>
+          <circle cx="15" cy="17" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+      <span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE STICKY BAR -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-left">
+    <div class="sticky-bar-title">{{ section.settings.sticky_title }}</div>
+    <div class="sticky-bar-sub">{{ section.settings.sticky_sub }}</div>
+  </div>
+  <a href="{{ section.settings.sticky_btn_link }}" class="sticky-bar-btn">{{ section.settings.sticky_btn_text }}</a>
+  <button class="sticky-bar-close" aria-label="Close" onclick="this.parentElement.remove()">&times;</button>
+</div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mob-nav" id="mob-nav" aria-hidden="true">
+  <div class="mob-nav-overlay" id="mob-nav-overlay"></div>
+  <div class="mob-nav-drawer" role="dialog" aria-label="Navigation menu">
+    <div class="mob-nav-top">
+      {% if section.settings.logo_image != blank %}
+        {{ section.settings.logo_image | image_url: width: 290 | image_tag: alt: shop.name, width: 290, height: 56, class: 'mob-nav-top-logo' }}
+      {% else %}
+        <img class="mob-nav-top-logo" src="https://jondosport.com/cdn/shop/files/JondoSport_new_logo_Navy.png?v=1761073533&width=290" alt="{{ shop.name }}" width="290" height="56">
+      {% endif %}
+      <button class="mob-nav-close" id="mob-nav-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mob-nav-links">
+      {% for block in section.blocks %}
+        {% if block.type == 'nav_link' %}
+          <a href="{{ block.settings.link_url }}">{{ block.settings.link_text }} <span class="mob-nav-chevron">›</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="mob-nav-bottom">
+      <a href="{{ section.settings.mob_shop_link }}" class="mob-nav-shop-btn">{{ section.settings.mob_shop_text }}</a>
+      <div class="mob-nav-trust">
+        <span>{{ section.settings.mob_trust_1 }}</span>
+        <span>{{ section.settings.mob_trust_2 }}</span>
+        <span>{{ section.settings.mob_trust_3 }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "jondo-header-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "url",
+      "id": "logo_url",
+      "label": "Logo link URL"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Sticky Bar"
+    },
+    {
+      "type": "text",
+      "id": "sticky_title",
+      "label": "Sticky bar title",
+      "default": "JONDO KRISP Extreme"
+    },
+    {
+      "type": "text",
+      "id": "sticky_sub",
+      "label": "Sticky bar subtitle",
+      "default": "★★★★★ 4.8 · 2,400+ reviews · From $242"
+    },
+    {
+      "type": "text",
+      "id": "sticky_btn_text",
+      "label": "Sticky bar button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "sticky_btn_link",
+      "label": "Sticky bar button link"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Nav Drawer"
+    },
+    {
+      "type": "text",
+      "id": "mob_shop_text",
+      "label": "Mobile shop button text",
+      "default": "Shop All Frames — From $242"
+    },
+    {
+      "type": "url",
+      "id": "mob_shop_link",
+      "label": "Mobile shop button link"
+    },
+    {
+      "type": "text",
+      "id": "mob_trust_1",
+      "label": "Mobile trust item 1",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "mob_trust_2",
+      "label": "Mobile trust item 2",
+      "default": "30-Day Returns"
+    },
+    {
+      "type": "text",
+      "id": "mob_trust_3",
+      "label": "Mobile trust item 3",
+      "default": "2-Year Warranty"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dropdown",
+          "label": "Show dropdown",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "dropdown_links",
+          "label": "Dropdown links",
+          "info": "One per line in format: Label > URL (e.g. All Frames > /collections/all)",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        {
+          "type": "nav_link",
+          "settings": {
+            "link_text": "Golf Sunglasses",
+            "link_url": "https://www.jondosport.com/collections/golf-sunglasses",
+            "show_dropdown": true,
+            "dropdown_links": "All Frames > https://www.jondosport.com/collections/golf-sunglasses|Small / Medium > https://www.jondosport.com/collections/golf-sunglasses|Medium / Large > https://www.jondosport.com/collections/golf-sunglasses"
+          }
+        },
+        {
+          "type": "nav_link",
+          "settings": {
+            "link_text": "The Krisp Difference",
+            "link_url": "https://www.jondosport.com/pages/krisp-extreme-explained",
+            "show_dropdown": false
+          }
+        },
+        {
+          "type": "nav_link",
+          "settings": {
+            "link_text": "Why Buy JONDO",
+            "link_url": "https://www.jondosport.com/pages/why-buy-jondo",
+            "show_dropdown": false
+          }
+        },
+        {
+          "type": "nav_link",
+          "settings": {
+            "link_text": "Journal",
+            "link_url": "https://www.jondosport.com/blogs/news",
+            "show_dropdown": false
+          }
+        },
+        {
+          "type": "nav_link",
+          "settings": {
+            "link_text": "FAQs",
+            "link_url": "https://www.jondosport.com/pages/jondo-faq",
+            "show_dropdown": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

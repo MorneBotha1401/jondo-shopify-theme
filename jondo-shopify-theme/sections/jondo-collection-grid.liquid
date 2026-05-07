@@ -1,0 +1,189 @@
+<section class="coll2-wrap">
+  <div class="coll2-wrap-header reveal">
+    <span class="coll2-wrap-eyebrow">{{ section.settings.eyebrow }}</span>
+    <div class="coll2-wrap-h">{{ section.settings.headline | replace: 'find your frame.', '<em>find your frame.</em>' }}</div>
+    <a href="{{ section.settings.btn_link }}" class="coll2-wrap-btn">{{ section.settings.btn_text }}</a>
+  </div>
+  <div class="coll2">
+    {% for block in section.blocks %}
+      {% if block.type == 'photo_tile' %}
+        <a href="{{ block.settings.link }}" class="coll2-tile" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: alt: block.settings.headline, loading: 'lazy', width: 1200, height: 800 }}
+          {% endif %}
+          <div class="coll2-tile-content">
+            <span class="coll2-tile-eyebrow">{{ block.settings.eyebrow }}</span>
+            <div class="coll2-tile-h">{{ block.settings.headline }}</div>
+            <span class="coll2-tile-link">{{ block.settings.link_text }}</span>
+          </div>
+        </a>
+      {% elsif block.type == 'text_tile' %}
+        <div class="coll2-typo"{% if block.settings.dark_bg %} style="background:var(--bg-darker)"{% endif %} {{ block.shopify_attributes }}>
+          <span class="coll2-typo-bg-num">{{ forloop.index }}.</span>
+          <span class="coll2-typo-eyebrow">{{ block.settings.eyebrow }}</span>
+          <h3 class="coll2-typo-h">{{ block.settings.headline }}</h3>
+          <p class="coll2-typo-body">{{ block.settings.body }}</p>
+          <a href="{{ block.settings.link }}" class="coll2-typo-link">{{ block.settings.link_text }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "div",
+  "class": "jondo-collection-grid-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Golf Eyewear · The Full Range"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Shop the collection — find your frame."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "Shop All Frames — From $242"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo_tile",
+      "name": "Photo Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tile image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Shop →"
+        }
+      ]
+    },
+    {
+      "type": "text_tile",
+      "name": "Text Tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body text",
+          "default": ""
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Learn more →"
+        },
+        {
+          "type": "checkbox",
+          "id": "dark_bg",
+          "label": "Use darker background",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Collection Grid",
+      "blocks": [
+        {
+          "type": "photo_tile",
+          "settings": {
+            "eyebrow": "Men's Collection",
+            "headline": "The course demands more. So should your eyes.",
+            "link": "https://www.jondosport.com/collections/golf-sunglasses",
+            "link_text": "Shop men's →"
+          }
+        },
+        {
+          "type": "photo_tile",
+          "settings": {
+            "eyebrow": "Women's Collection",
+            "headline": "Precision engineered for every golfer.",
+            "link": "https://www.jondosport.com/collections/golf-sunglasses",
+            "link_text": "Shop women's →"
+          }
+        },
+        {
+          "type": "text_tile",
+          "settings": {
+            "eyebrow": "Cast in an RX Optical Lab",
+            "headline": "Cast, not coated.",
+            "body": "KRISP Extreme lenses are poured in one solid optical pour — tint, clarity, and light filter are all structural. They won't scratch, fade, or degrade. Ever.",
+            "link": "https://www.jondosport.com/pages/krisp-extreme-explained",
+            "link_text": "Explore the lens technology →",
+            "dark_bg": false
+          }
+        },
+        {
+          "type": "text_tile",
+          "settings": {
+            "eyebrow": "4× Major Champion · Co-Owner",
+            "headline": "Not a deal. A belief.",
+            "body": "Ernie Els co-owns JONDO because he plays in them. A 4× Major Champion's commitment to the lens — not a sponsorship, a conviction.",
+            "link": "https://www.jondosport.com/pages/why-buy-jondo",
+            "link_text": "Read the story →",
+            "dark_bg": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

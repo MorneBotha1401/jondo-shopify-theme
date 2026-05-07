@@ -1,0 +1,42 @@
+<div class="ernie-bar">
+  {% if section.settings.photo != blank %}
+    {{ section.settings.photo | image_url: width: 120 | image_tag: alt: 'Ernie Els', class: 'ernie-bar-photo', width: 120, height: 120 }}
+  {% endif %}
+  <div>
+    <p class="ernie-bar-quote">"{{ section.settings.quote }}"</p>
+    <span class="ernie-bar-attr">{{ section.settings.attribution }}</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ernie Bar",
+  "tag": "div",
+  "class": "jondo-ernie-bar-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Ernie photo",
+      "info": "Upload ernie-els.jpg to Shopify Files then select it here."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I've never found a sunglass I could play with that are so clear and comfortable as these JONDO glasses."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Attribution",
+      "default": "Ernie Els · 4× Major Champion · Co-Owner, JONDO Sport"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ernie Bar"
+    }
+  ]
+}
+{% endschema %}

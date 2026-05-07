@@ -1,0 +1,103 @@
+<section class="faq reveal">
+  <div class="container">
+    <div class="faq-head">
+      <span class="faq-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="faq-h">{{ section.settings.headline }}</h2>
+    </div>
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        {% if block.type == 'faq_item' %}
+          <div class="faq-item" {{ block.shopify_attributes }}>
+            <h3 class="faq-q">{{ block.settings.question }}</h3>
+            <p class="faq-a">{{ block.settings.answer }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "div",
+  "class": "jondo-faq-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Before You Order"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Questions answered."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will these fit my face?",
+            "answer": "JONDO offers several frame styles — from the wrap-fit Club Champ to the classic Dormie and Sandy — each designed for active wear on the course. Every frame ships with a 30-day return policy, so you can try them on the course with zero risk."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if they're not right for me?",
+            "answer": "We offer a 30-day return policy. If you're not completely satisfied — fit, feel, or performance — return them for a full refund or exchange. No hoops, no restocking fee. We stand behind the lens completely."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How are JONDO lenses different from Oakley or Maui Jim?",
+            "answer": "Both are serious brands — but neither is engineered for golf. Maui Jim's polarization flattens the grain and texture you need to read greens. Oakley Prizm uses a surface coating. JONDO KRISP Extreme lenses are cast in one solid pour — tint, clarity, and light filter are structural, not cosmetic. Non-polarized by design, so every texture on the fairway stays visible."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I get prescription lenses?",
+            "answer": "JONDO frames are currently available in non-prescription only. If you wear prescription eyewear on the course, contact us at info@jondosport.com — we're happy to discuss what works best for your situation."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "All US orders ship free. Standard delivery is typically 5–7 business days. Expedited options are available at checkout. Orders placed before 2 PM EST on business days ship the same day."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
